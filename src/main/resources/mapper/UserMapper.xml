@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pepsiwyl.mapper.UserMapper">
+
+    <!--使用redis为缓存介质-->
+    <cache type="com.pepsiwyl.cache.RedisCache"/>
+
+    <select id="getUsers" resultType="user">
+        select *
+        from redis_cache.user;
+    </select>
+
+    <select id="getUserById" resultType="user">
+        select *
+        from redis_cache.user
+        where user.id = #{id};
+    </select>
+
+    <insert id="addUser">
+        insert into redis_cache.user (name, age, email)
+        values (#{name}, #{age}, #{email});
+    </insert>
+
+    <delete id="deleteUserById">
+        delete
+        from redis_cache.user
+        where user.id = #{id};
+    </delete>
+
+    <update id="updateUserById">
+        update redis_cache.user
+        set name  = #{name},
+            age   = #{age},
+            email = #{email}
+        WHERE id = #{id};
+    </update>
+
+</mapper>

@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    # 基本数据参数配置
+    url: jdbc:mysql://192.168.131.130:3306/redis_cache?useSSL=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceWrapper
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.pepsiwyl.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
